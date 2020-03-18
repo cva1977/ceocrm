@@ -1,0 +1,146 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table">
+                <td>
+                    <div class="calcTitle">
+                        <h1 class="titleSlider">
+                            Crear <small class="subTitleSlider">usuario</small>
+                        </h1>
+                    </div>
+                </td>
+            </table>
+        </div>
+        <section id="wrapper" style="background: #ffffff;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 offset-md-3">
+                    <div class="white-box">
+                        <div class="form-titulo">
+                            <form [formGroup]="searchForm" (ngSubmit)="onSubmitRut()">
+                                <div class="form-group row">
+                                    <div class="col-xs-12 form-inline">
+                                        RUT:
+                                        <font color="red">(*)</font>&nbsp;
+                                        <input [ngClass]="{'is-invalid': searchForm.controls.rut.errors}" type="text" formControlName="rut" class="form-control" (keypress)="keyPress($event)">
+                                        <button class="btn  btn-info" type="submit" [disabled]="searchForm.controls.rut.errors">Validar</button>
+
+                                        <div *ngIf="searchForm.controls.rut.errors" class="invalid-feedback error-text">
+                                            <div *ngIf="searchForm.get('rut').hasError('required')">
+                                                (*) Debe Ingresar su RUT en formato 12345678-9
+                                            </div>
+                                            <div *ngIf="searchForm.get('rut').hasError('validaRut')">
+                                                Debe Ingresar un RUT valido
+                                            </div>
+                                            &nbsp;
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div *ngIf="userExist" class="col-lg-12 white-box" align="center">
+                                    <h3 class="h3azul"> Usuario ya Existe y es solo modificable</h3>
+                                    <h1 class="h3azul"> Para modificar haga click en el botón</h1>
+                                    <button class="btn btn-info btn-rounded waves-effect waves-light" type="button" [routerLink]="['/modificar-usuario',emailUsuerExist]" skipLocationChange>Modificar usuario</button>
+
+                                </div>
+
+                                <!--<div *ngIf="!lengthRut" class="white-box">
+                                    <h3 class="h3azul"> El Rut debe ser mayor a 6 dígitos</h3>
+                                </div>-->
+
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="!userExist && lengthRut" class="white-box">
+                        <div class="row">
+                            <form [formGroup]="modificarForm" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                <div class="form-group col-lg-3" [ngClass]="{'has-error': modificarForm.controls.email.errors && submitted }">
+                                    <label>Usuario: </label>
+                                    <input type="text" formControlName="email" class="form-control" id="email" name="email" [(ngModel)]="usuario.email">
+                                    <div *ngIf="modificarForm.controls.email.errors" class="invalid-feedback error-text">
+                                        <div *ngIf="modificarForm.controls.email.errors.required">Campo obligatorio.</div>
+                                        <div *ngIf="modificarForm.controls.email.errors.email">Formato de correo no valido.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <label>&nbsp; </label>
+                                    <input type="text" formControlName="sufijo" class="form-control" id="sufijo" name="sufijo" value="sufijo" disabled>
+                                </div>
+
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.nombres.errors && submitted }">
+                                    <label>Nombres: </label>
+                                    <input type="text" formControlName="nombres" class="form-control" id="nombres" name="nombres" [(ngModel)]="usuario.nombres">
+                                    <div *ngIf="modificarForm.controls.nombres.errors" class="invalid-feedback error-text">
+                                        <div *ngIf="modificarForm.controls.nombres.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.apellido_paterno.errors && submitted }">
+                                    <label>Apellido Paterno: </label>
+                                    <input type="text" formControlName="apellido_paterno" class="form-control" id="apellido_paterno" name="apellido_paterno" [(ngModel)]="usuario.apellido_paterno">
+                                    <div *ngIf="modificarForm.controls.apellido_paterno.errors" class="invalid-feedback">
+                                        <div *ngIf="modificarForm.controls.apellido_paterno.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.apellido_materno.errors && submitted }">
+                                    <label>Apellido Materno: </label>
+                                    <input type="text" formControlName="apellido_materno" class="form-control" id="apellido_materno" name="apellido_materno" [(ngModel)]="usuario.apellido_materno">
+                                    <div *ngIf="modificarForm.controls.apellido_materno.errors" class="invalid-feedback">
+                                        <div *ngIf="modificarForm.controls.apellido_materno.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.puesto_real.errors && submitted }">
+                                    <label>Puesto: </label>
+                                    <input type="text" formControlName="puesto_real" class="form-control" id="puesto_real" name="puesto_real" [(ngModel)]="usuario.puesto_real">
+                                    <div *ngIf="modificarForm.controls.puesto_real.errors" class="invalid-feedback">
+                                        <div *ngIf="modificarForm.controls.puesto_real.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.sucursal.errors && submitted }">
+                                    <label>Scucursal</label>
+                                    <input type="text" formControlName="sucursal" #searchInput placeholder="Buscar..." (keyup)="search($event)" name="buscador" class="form-control" [matAutocomplete]="auto" [ngClass]="{ 'is-invalid': submitted && modificarForm.controls.sucursal.errors }"
+                                        [(ngModel)]="usuario.sucursal">
+                                    <a href=""><i class="fa fa-search"></i></a>
+                                    <div *ngIf="submitted && modificarForm.controls.sucursal.errors" class="invalid-feedback">
+                                        <div *ngIf="modificarForm.controls.sucursal.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.SUCURSAL">
+                                            <div><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{emp?.SUCURSAL }}</font></font></small>
+                                            </div>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Tipo</label>
+                                    <mat-checkbox [(ngModel)]="Ischecked" [checked]="Ischecked" class="form-control" formControlName="es_ejec" (ngModelChange)="modelChange($event)"><label>ES EJECUTIVO</label></mat-checkbox>
+                                </div>
+
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': modificarForm.controls.nivel_acceso.errors && submitted}">
+                                    <label>Nivel Acceso</label>
+                                    <select class="form-control" [ngClass]="{'is-invalid': submitted && modificarForm.controls.nivel_acceso.errors}" formControlName="nivel_acceso" name="nivel_acceso" [(ngModel)]="usuario.nivel_acceso">
+                                        <option value='' selected>Seleccione nivel acceso...</option>
+                                        <option *ngFor="let nivel_acceso of nivelAcceso" value="{{nivel_acceso.acceso}}">{{nivel_acceso.name}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && modificarForm.controls.nivel_acceso.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && modificarForm.controls.nivel_acceso.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group col-xs-12 col-lg-12">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<ul class="col-in" *ngFor="let empresa of empresas">
+    <li>
+        <span class="circle circle-md bg-kpi"> <i class="fa fa-dollar fa-4x"></i></span>
+    </li>
+    <li class="col-last">
+        <h4 class="counter text-right m-t-15">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">
+                    ${{empresa.data.APROBADA_STOCK / 1000000 | number:'1.0-0'}}
+                </font>
+            </font>
+        </h4>
+    </li>
+    <li class="col-middle">
+        <h5>
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Monto Ofertado</font>
+            </font>
+        </h5>
+
+    </li>
+
+</ul>

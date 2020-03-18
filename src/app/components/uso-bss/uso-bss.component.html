@@ -1,0 +1,156 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+ <div class="white-box" style="border-top: 2px solid #00bd70;">
+ 
+            <h3 class="box-title"><font style="vertical-align: inherit;">
+                <font  style="vertical-align: inherit;">Beneficios Sociales </font></font>
+               </h3>
+
+
+
+  
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"><h5>Salud</h5></th>
+                    <th class="text-center"><h5>Educación</h5></th>
+                    <th class="text-center"><h5>Apoyo Social</h5></th>
+                    <th class="text-center"><h5>Entretencion</h5></th>
+                    <th class="text-center"><h5>Total</h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr >
+                    
+                    <td align="center"><h5>Penetración</h5></td>
+                    
+                   
+                    
+                     <td align="center">
+                         <ng-container *ngFor="let empresa of usoBBSS">
+                            <h4 *ngIf="empresa.data.CLASIFICACION=='SALUD'">{{ empresa.data.PENETRACION_BBSS | percent}}</h4>
+                       </ng-container>
+                    </td>
+                    <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='EDUCACIÓN'">{{ empresa.data.PENETRACION_BBSS | percent}}</h4>
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='APOYO SOCIAL'">{{ empresa.data.PENETRACION_BBSS | percent}}</h4>
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='PANORAMAS Y ENTRETENCIÓN'">{{ empresa.data.PENETRACION_BBSS | percent}}</h4>
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='TOTAL'">{{ empresa.data.PENETRACION_BBSS | percent}}</h4>
+                          </ng-container>
+                       </td>
+
+                    
+                </tr>
+                <tr>
+                    <td align="center"><h5>Monto Percibido</h5></td>
+                    <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='SALUD' && empresa.data.MONTO>=1000000">${{ empresa.data.MONTO/1000000 | number:'1.0-0':'es'}}MM</h4>
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='SALUD' && empresa.data.MONTO<1000000">${{ empresa.data.MONTO | number:'1.0-0':'es'}}</h4>
+                        
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='EDUCACIÓN' && empresa.data.MONTO>=1000000">${{ empresa.data.MONTO/1000000 | number:'1.0-0':'es'}}MM</h4>
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='EDUCACIÓN' && empresa.data.MONTO<1000000">${{ empresa.data.MONTO | number:'1.0-0':'es'}}</h4>
+                        
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='APOYO SOCIAL' && empresa.data.MONTO>=1000000">${{ empresa.data.MONTO/1000000 | number:'1.0-0':'es'}}MM</h4>
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='APOYO SOCIAL' && empresa.data.MONTO<1000000">${{ empresa.data.MONTO | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='PANORAMAS Y ENTRETENCIÓN' && empresa.data.MONTO>=1000000">${{ empresa.data.MONTO/1000000 | number:'1.0-0':'es'}}MM</h4>
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='PANORAMAS Y ENTRETENCIÓN' && empresa.data.MONTO<1000000">${{ empresa.data.MONTO | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='TOTAL' && empresa.data.MONTO>=1000000 ">${{ empresa.data.MONTO/1000000 | number:'1.0-0':'es'}}MM</h4>
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='TOTAL' && empresa.data.MONTO<1000000 ">${{ empresa.data.MONTO | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+
+                </tr>
+                <tr>
+                    <td align="center"><h5>N° Usuarios</h5></td>
+                    <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='SALUD'">{{ empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='EDUCACIÓN'">{{ empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='APOYO SOCIAL'">{{ empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='PANORAMAS Y ENTRETENCIÓN'">{{ empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='TOTAL'">{{ empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+          
+                </tr>
+                <tr>
+                    <td align="center"><h5>Monto Por Usuario</h5></td>
+                    <td align="center">
+                            <ng-container *ngFor="let empresa of usoBBSS">
+                               <h4 *ngIf="empresa.data.CLASIFICACION=='SALUD'">${{ empresa.data.MONTO / empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                          </ng-container>
+                       </td>
+                       <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='EDUCACIÓN'">${{ empresa.data.MONTO / empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='APOYO SOCIAL'">${{ empresa.data.MONTO / empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='PANORAMAS Y ENTRETENCIÓN'">${{ empresa.data.MONTO / empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+                          <td align="center">
+                               <ng-container *ngFor="let empresa of usoBBSS">
+                                  <h4 *ngIf="empresa.data.CLASIFICACION=='TOTAL'">${{ empresa.data.MONTO / empresa.data.RUT_UNICOS | number:'1.0-0':'es'}}</h4>
+                             </ng-container>
+                          </td>
+
+                </tr>
+                
+            </tbody>
+        </table>
+    
+</div>
+</div>

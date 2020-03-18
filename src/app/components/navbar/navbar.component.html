@@ -1,0 +1,129 @@
+<!-- ============================================================== -->
+<!-- Topbar header - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<nav class="navbar navbar-default navbar-static-top m-b-0">
+    <div class="navbar-header">
+        <div class="top-left-part">
+            <!-- Logo -->
+            <a class="logo" href="#">
+                <!-- Logo icon image, you can use font-icon also -->
+                <!--This is dark logo icon-->
+
+                <span class="hidden-xs hidden-sm" style=""></span>
+                <!-- Logo text image you can use text also --><span style="padding-left:5px;">
+                      <!--This is dark logo text--><img src="./assets/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text-->
+                   </span> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-left">
+            <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+
+                    <a href="#" class="button-badge">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge red" *ngIf="totales>0">{{totales}}</span>
+                    </a>
+
+                </a>
+                <ul class="dropdown-menu mailbox animated bounceInDown">
+                    <li>
+                        <div class="drop-title">Tiene {{totales}} nuevos mensajes</div>
+                    </li>
+                    <li style="height: 200px; overflow: auto">
+                        <div class="message-center" *ngFor="let notificacion of notifica">
+                            <a [routerLink]="['/lead',notificacion.id]" skipLocationChange>
+
+                                <div class="mail-contnet">
+                                    <h5>{{notificacion.data.nombre}}</h5>
+                                    <ng-container *ngIf="notificacion.data.tipo_campana==1">
+                                        <span class="mail-desc">Leads Pensionado</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="notificacion.data.tipo_campana==2">
+                                        <span class="mail-desc">Leads Crédito Social</span>
+                                    </ng-container>
+
+                                    <span class="time">{{notificacion.data.created_time.toDate() | date:'dd/MM/yyyy hh:mm'}}</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    <li>
+                        <a class="text-center" href="javascript:void(0);" [routerLink]="['/leads']"> <strong>Ver Todas</strong> <i class="fa fa-angle-right"></i> </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+
+        </ul>
+        <!-- /Logo -->
+        <!-- Search input and Toggle icon -->
+
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+                <form role="search" class="app-search  m-r-10" #f="ngForm">
+                    <ng-container *ngIf="userPerfil?.NIVEL_ACCESO==1 || userPerfil?.NIVEL_ACCESO==4 || userPerfil?.NIVEL_ACCESO==99">
+                        <div class="radio radio-inline radio-success">
+                            <input type="radio" name="tipo" id="radio14" [(ngModel)]="myRadio" value=2 (click)="clearSearchInput()">
+                            <label for="radio14" class="color-white">Empr.</label>
+                        </div>
+                        <div class="radio radio-inline radio-success">
+                            <input type="radio" name="tipo" id="radio15" [(ngModel)]="myRadio" value=3 (click)="clearSearchInput()">
+                            <label for="radio15" class="color-white">Afil.</label>
+                        </div>
+                        &nbsp;&nbsp;
+                    </ng-container>
+                    <ng-container *ngIf="userPerfil?.NIVEL_ACCESO==2">
+                        <label class="color-white">Empresa</label> &nbsp;&nbsp;
+                    </ng-container>
+                    <ng-container *ngIf="userPerfil?.NIVEL_ACCESO==3">
+                        <label class="color-white">Afiliado</label> &nbsp;&nbsp;
+                    </ng-container>
+                    <input type="text" #searchInput placeholder="Buscar..." (keyup)="search($event,f)" name="buscador" class="form-control" [matAutocomplete]="auto">
+                    <a href=""><i class="fa fa-search"></i></a> </form>
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.RUT_PERSONA || emp.RUT_EMPRESA">
+                        <div><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{emp?.RUT_PERSONA || emp?.RUT_EMPRESA }}
+                                  </font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ emp?.NOMBRES || emp?.RAZON_SOCIAL_EMPRESA}}</font></font></small>
+                        </div>
+
+                    </mat-option>
+                </mat-autocomplete>
+            </li>
+            <li class="dropdown hidden-xs" *ngIf="loggedIn">
+                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="{{user.photoURL}}" alt="user-img" width="36" class="img-circle">
+                    <b class="hidden-xs hidden-sm">{{userPerfil?.NOMBRES}}</b><span class="caret"></span> </a>
+                <ul class="dropdown-menu dropdown-user animated flipInY">
+                    <li>
+                        <div class="dw-user-box">
+                            <div class="u-img"><img src="{{user.photoURL}}" alt="user" /></div>
+                            <div class="u-text">
+                                <h4>{{user.displayName}}</h4>
+                                <p class="text-muted">{{user.email}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <div class="dw-user-box">
+                            <div class="u-text">
+                                <h4>{{userPerfil?.PUESTO_REAL}}</h4>
+                                <p class="text-muted">{{userPerfil?.SUCURSAL}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+
+            <!-- /.dropdown -->
+        </ul>
+    </div>
+    <!-- /.navbar-header -->
+    <!-- /.navbar-top-links -->
+    <!-- /.navbar-static-side -->
+</nav>
+<!-- End Top Navigation -->

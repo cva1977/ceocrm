@@ -1,0 +1,93 @@
+<div class="col-md-6" *ngFor="let afiliado of afiliados">
+    <div class="panel">
+        <div class="p-30">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3">
+
+                    <img *ngIf="afiliado.data.SEXO_PERSONA=='M'" src="./assets/images/boss.png" class="img-circle img-responsive">
+                    <img *ngIf="afiliado.data.SEXO_PERSONA=='F'" src="./assets/images/woman.png" class="img-circle img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <h2 class="m-b-0">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">{{ afiliado.data.NOMBRES}}</font>
+                        </font>
+                    </h2>
+                    <h4>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">{{ afiliado.data.RUT_PERSONA | number:'1.0-0':'es'}}-{{ afiliado.data.DV_RUT_PERSONA }}</font>
+                        </font>
+                    </h4>
+                    <br><br>
+                    <address>
+                          <font style="vertical-align: inherit;">
+                                <strong><font style="vertical-align: inherit;">Email: </font></strong> {{ afiliado.data.CORREO_ELECT_PERSONA}}
+                            
+                          </font>
+                          <br><font style="vertical-align: inherit;">
+                            <strong><font style="vertical-align: inherit;">
+                            Fecha Nacimiento : </font></strong>{{ afiliado.data.FECHA_NACIMIENTO_PERSONA}} 
+                        
+                    </font>
+                            <br>
+                            <font style="vertical-align: inherit;">
+                                <strong><font style="vertical-align: inherit;">
+                            Estado Civil: </font></strong>{{ afiliado.data.ESTADO_CIVIL}} 
+                        
+                    </font>
+                            <br>
+                          <font style="vertical-align: inherit;">
+                            <strong><font style="vertical-align: inherit;">
+                                Dirección: </font></strong>{{ afiliado.data.DIRECCION_PERSONA}} 
+                            
+                        </font><br>
+                                <font style="vertical-align: inherit;">
+                                    <strong>
+                                        <font style="vertical-align: inherit;">
+                                        Ciudad: 
+                                    </font>
+                                </strong>{{ afiliado.data.CIUDAD_PERSONA}} 
+                                </font><br>
+                                        <font style="vertical-align: inherit;">
+                                            <strong><font style="vertical-align: inherit;">
+                                                Comuna: </font></strong>{{ afiliado.data.COMUNA_PERSONA}} 
+                                            
+                                        </font><br>
+                                                <font style="vertical-align: inherit;">
+                                                    <strong><font style="vertical-align: inherit;">
+                                                        Fono: 
+                                                    </font></strong>
+                                                    {{ afiliado.data.FONO_MOVIL}} 
+                                                </font><br>
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;">
+                                                                    <ng-container *ngIf="afiliado.data.CODIGO_OF_VIRTUAL == 2">
+                                                                            <strong><font style="vertical-align: inherit;">Oficina Virtual: </font></strong> <font style="vertical-align: inherit;">ENROLADO</font>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="afiliado.data.CODIGO_OF_VIRTUAL != 2">
+                                                                            <strong><font style="vertical-align: inherit;">Oficina Virtual: </font></strong> <font style="vertical-align: inherit;">NO ENROLADO</font>
+                                                                    </ng-container>
+                                                            </font>
+                                                        </font><br>
+                                                                <font style="vertical-align: inherit;">
+                                                                    <strong><font style="vertical-align: inherit;">
+                                                                        Numero de Cargas: </font></strong>{{ afiliado.data.N_CARGA}} </font><br>
+                                                                        <font style="vertical-align: inherit;">
+                                                                            <strong><font style="vertical-align: inherit;">
+                                                                                GSE: </font></strong>{{ afiliado.data.GSE}} </font><br>
+                         </address>
+                </div>
+
+            </div>
+        </div>
+        <hr class="m-t-10" />
+
+        <ul class="dp-table profile-social-icons">
+            <li><a href="javascript:void(0)"><i class="fa fa-globe"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</div>

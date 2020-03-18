@@ -1,0 +1,52 @@
+<div class="col-md-12 col-sm-12 col-lg-5" *ngFor="let empresa of empresas">
+    <div class="panel">
+        <div class="p-30">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4">
+
+                    <img *ngIf="empresa.data.LOGO==1" src="./assets/images/{{empresa.data.RUT_EMPRESA}}.jpg" class="img-circle img-responsive">
+                    <img *ngIf="empresa.data.LOGO==0" src="./assets/images/factory.png" class="img-circle img-responsive">
+
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <h2 class="m-b-0">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">{{empresa.data.RAZON_SOCIAL_EMPRESA}}</font>
+                        </font>
+                    </h2>
+                    <h4>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">{{empresa.data.RUT_EMPRESA}}-{{empresa.data.DV_RUT_EMPRESA}}</font>
+                        </font>
+                    </h4>
+                    <h4>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;"><b>{{empresa.data.CODIGO_CARTERA}}</b>-<b>{{empresa.data.SEGMENTO_EMPRESA}}</b></font>
+                        </font>
+                    </h4>
+                    <br><br>
+                    <address>
+                      <strong><font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Fecha Afiliación: {{empresa.data.FECHA_AFILIACION_EMPRESA}}</font>
+                      </font></strong> <br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                        Ejecutivo : {{empresa.data.EJECUTIVO_EMPRESA}} </font></font><br>
+                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                        Sucursal: {{empresa.data.Sucursal_Empresa}} </font></font><br>
+                      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            Actividad: {{empresa.data.ACTIVIDAD_ECONOMICA}} </font></font><br>
+                     </address>
+                </div>
+
+            </div>
+        </div>
+        <hr class="m-t-10" />
+
+        <ul class="dp-table profile-social-icons">
+            <li><a href="javascript:void(0)"><i class="fa fa-globe"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+
+<mat-card>
+    <mat-card-title>Mapa</mat-card-title>
+    <mat-card-content>
+        <!-- this creates a google map on the page with the given lat/lng from -->
+        <!-- the component as the initial center of the map: -->
+    
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]=11>
+          <div *ngFor="let marcador of marcadores">
+              <agm-marker *ngIf="marcador.estado=='Operativa'"  [latitude]="marcador.lat"
+              [longitude]="marcador.lng"   [iconUrl]="icon">
+   
+                   <agm-info-window>
+                       <strong>{{marcador.title}}</strong>
+
+                       <p>
+                          <span class="badge badge-primary">{{ marcador.estado }}</span>
+                           
+   
+                       </p>
+                       <p>
+                          {{ marcador.direccion }}
+  
+                      </p>
+                   </agm-info-window>
+             </agm-marker>
+             <agm-marker *ngIf="marcador.estado=='Cerrada'"  [latitude]="marcador.lat"
+              [longitude]="marcador.lng"   [iconUrl]="icon_disabled">
+   
+                   <agm-info-window>
+                       <strong>{{marcador.title}}</strong>
+                       <p>
+                          <span class="badge badge-danger">{{ marcador.estado }}</span>
+                           
+   
+                       </p>
+                       <p>
+                          {{ marcador.direccion }}
+  
+                      </p>
+                   </agm-info-window>
+             </agm-marker>
+          </div>
+        
+          <agm-marker-cluster [imagePath]="'assets/images/m'">
+            <agm-marker *ngFor="let colaborador of colaboradores" [latitude]="colaborador.lat" [longitude]="colaborador.lng"></agm-marker>
+          </agm-marker-cluster>
+        
+        </agm-map></mat-card-content>
+
+</mat-card>
